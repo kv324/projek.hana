@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Page</title>
+  <style>
+    /* Pastel background */
+    body {
+      background-color: #ffe6e6;
+      font-family: 'Pacifico', cursive;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+    }
+
+    .big-heart {
+      font-size: 5rem;
+      color: #ff9999;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    .big-heart:hover {
+      transform: scale(1.2);
+    }
+
+    .button {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: white;
+      background-color: #ff8080;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #ff4d4d;
+    }
+
+    .hidden-content {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .small-hearts span {
+      font-size: 2rem;
+      display: inline-block;
+      animation: float 1s infinite alternate;
+    }
+
+    @keyframes float {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-10px);
+      }
+    }
+
+    .flowers {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      opacity: 0;
+      margin-top: 20px;
+    }
+
+    .flower {
+      width: 0;
+      height: 0;
+      background-color: pink;
+      border-radius: 50%;
+      transform: scale(0);
+      animation: grow 1s forwards ease-in-out;
+    }
+
+    @keyframes grow {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    .text {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #ff4d4d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="big-heart" id="bigHeart">❤️</div>
+    <button class="button" id="openButton">Pencet Ay</button>
+    <div class="hidden-content" id="hiddenContent">
+      <div class="small-hearts">
+        <span>💖</span><span>💖</span><span>💖</span>
+        <span>💖</span><span>💖</span><span>💖</span>
+      </div>
+      <div class="flowers" id="flowers">
+        <div class="flower"></div>
+        <div class="flower"></div>
+        <div class="flower"></div>
+        <div class="flower"></div>
+        <div class="flower"></div>
+      </div>
+      <div class="text">I Love You Hana</div>
+    </div>
+  </div>
+  <script>
+    const bigHeart = document.getElementById('bigHeart');
+    const openButton = document.getElementById('openButton');
+    const hiddenContent = document.getElementById('hiddenContent');
+    const flowers = document.getElementById('flowers');
+
+    openButton.addEventListener('click', () => {
+      // Animasi big heart mengecil
+      bigHeart.style.transform = 'scale(0)';
+      setTimeout(() => {
+        bigHeart.style.display = 'none'; // Hilangkan big heart
+        openButton.style.display = 'none'; // Hilangkan tombol pencet
+        hiddenContent.style.display = 'block'; // Tampilkan konten tersembunyi
+        animateFlowers();
+      }, 500);
+    });
+
+    function animateFlowers() {
+      flowers.style.opacity = 1; // Tampilkan bunga
+      const flowerElements = document.querySelectorAll('.flower');
+      flowerElements.forEach((flower, index) => {
+        setTimeout(() => {
+          flower.style.animationDelay = `${index * 0.3}s`; // Mekar berurutan
+          flower.style.animationPlayState = "running"; // Jalankan animasi
+        }, index * 300);
+      });
+    }
+  </script>
+</body>
+</html>
