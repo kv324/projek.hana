@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Love You Hana</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #ff9aa2, #ffd1dc);
+      font-family: 'Cursive', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    /* Kuis */
+    .quiz-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 20px 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s forwards;
+    }
+
+    .quiz-question {
+      font-size: 24px;
+      color: #d23669;
+      margin-bottom: 20px;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .button {
+      background: #ff9aa2;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.1);
+      background: #ff577f;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Pesan */
+    .message-container {
+      display: none;
+      text-align: center;
+    }
+
+    .message {
+      font-size: 40px;
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-out;
+    }
+
+    /* Karakter Cowok */
+    .character {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px;
+      background: url('https://img.icons8.com/external-flaticons-lineal-color-flat-icons/150/ffffff/external-boy-childhood-flaticons-lineal-color-flat-icons.png') no-repeat center;
+      background-size: contain;
+      animation: slideIn 2s ease-out forwards;
+      transform: translateY(50px);
+      opacity: 0;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Partikel Hati */
+    .heart {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: pink;
+      border-radius: 50%;
+      transform: rotate(45deg);
+      animation: floatUp 5s infinite ease-out;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-50px) scale(1);
+      }
+      100% {
+        transform: translateY(-150px) scale(0.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Kuis -->
+    <div class="quiz-box" id="quizBox">
+      <div class="quiz-question">Kamu sayang aku ngga?</div>
+      <div class="button-group">
+        <button class="button" id="yesButton">Iya</button>
+        <button class="button" id="noButton">Ngga</button>
+      </div>
+    </div>
+
+    <!-- Pesan -->
+    <div class="message-container" id="messageContainer">
+      <div class="character"></div>
+      <div class="message" id="message">I Love You Hana</div>
+    </div>
+  </div>
+
+  <script>
+    const quizBox = document.getElementById("quizBox");
+    const yesButton = document.getElementById("yesButton");
+    const noButton = document.getElementById("noButton");
+    const messageContainer = document.getElementById("messageContainer");
+
+    // Klik "Iya"
+    yesButton.addEventListener("click", () => {
+      quizBox.style.display = "none";
+      messageContainer.style.display = "block";
+      createHearts();
+    });
+
+    // Klik "Ngga"
+    noButton.addEventListener("click", () => {
+      alert("Ah masa sih? 😔");
+    });
+
+    // Partikel Hati
+    function createHearts() {
+      for (let i = 0; i < 25; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = Math.random() * 3 + "s";
+        document.body.appendChild(heart);
+
+        // Hapus hati setelah animasi selesai
+        setTimeout(() => heart.remove(), 5000);
+      }
+    }
+  </script>
+</body>
+</html>
